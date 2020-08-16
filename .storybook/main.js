@@ -10,7 +10,12 @@ module.exports = {
     "@storybook/addon-actions",
     "@storybook/addon-viewport",
     "@storybook/addon-knobs",
-		"@storybook/addon-docs",
+		{
+      name: "@storybook/addon-docs",
+      options: {
+        configureJSX: true,
+      }
+    },
 		"@storybook/addon-a11y",
 		"@storybook/addon-storysource",
   ],

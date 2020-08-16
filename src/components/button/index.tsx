@@ -6,8 +6,6 @@ const LanButton = styled.button({
 	color: 'red',
 })
 
-console.log(styled, styled.button)
-
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
 function Button(props: PropsWithChildren<ButtonProps>) {
