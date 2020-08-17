@@ -34,6 +34,12 @@ Run storybook Examples
 yarn sb
 ```
 
+Run Tests
+```shell
+yarn coverage
+npx http-server ./coverage
+```
+
 TODO
 
 ## FAQ
