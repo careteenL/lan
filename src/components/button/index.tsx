@@ -387,7 +387,7 @@ const StyledButton = styled.button<ButtonProps>`
 
 // interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-function Button(props: PropsWithChildren<ButtonProps>) {
+export function Button(props: PropsWithChildren<ButtonProps>) {
 	const { isLoading, loadingText, isLink, children } = props;
 	const buttonInner = (
 		<>
