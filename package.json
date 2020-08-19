@@ -1,7 +1,7 @@
 {
-  "name": "lan",
+  "name": "@careteen/lan",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -17,13 +17,18 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 6006 -s public",
     "build-sb": "build-storybook -s public",
     "coverage": "react-scripts test --coverage --watchAll=false"
   },
+  "files": [
+    "dist"
+  ],
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -55,6 +60,12 @@
     "@types/styled-components": "^5.1.2",
     "babel-loader": "^8.1.0",
     "react-is": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "styled-components": "^5.1.1"
+  },
+  "peerDependencies": {
+    "react": ">16.8.0",
+    "react-dom": ">16.8.0",
     "styled-components": "^5.1.1"
   },
   "jest": {
