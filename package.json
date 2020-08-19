@@ -1,6 +1,6 @@
 {
   "name": "@careteen/lan",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 6006 -s public",
     "build-sb": "build-storybook -s public",
-    "coverage": "react-scripts test --coverage --watchAll=false"
+    "coverage": "react-scripts test --coverage --watchAll=false",
+    "deploy": "yarn build && npm publish --access=public"
   },
   "files": [
     "dist"
