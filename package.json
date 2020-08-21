@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "coveralls": "^3.1.0",
     "polished": "^3.6.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -25,7 +26,8 @@
     "build-sb": "build-storybook -s public",
     "build-sbs": "build-storybook --no-dll --quiet",
     "coverage": "react-scripts test --coverage --watchAll=false",
-    "deploy": "yarn build && npm publish --access=public"
+    "deploy": "yarn build && npm publish --access=public",
+    "coverall": "npm run coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/@careteenl"
@@ -66,10 +68,10 @@
     "@storybook/react": "^6.0.10",
     "@types/styled-components": "^5.1.2",
     "babel-loader": "^8.1.0",
-    "react-is": "^16.13.1",
-    "rimraf": "^3.0.2",
     "react": ">16.8.0",
     "react-dom": ">16.8.0",
+    "react-is": "^16.13.1",
+    "rimraf": "^3.0.2",
     "styled-components": "^5.1.1"
   },
   "peerDependencies": {

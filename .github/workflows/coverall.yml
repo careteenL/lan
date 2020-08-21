@@ -1,0 +1,7 @@
+- name: Coveralls
+  env:
+    COVERALLS_SERVICE_NAME: 'GitHub CI'
+    COVERALLS_GIT_BRANCH: master
+    COVERALLS_REPO_TOKEN : ${{ secrets.COVERALLS_REPO_TOKEN }}
+  run: |
+    npm run coverall
