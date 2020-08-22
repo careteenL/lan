@@ -126,11 +126,11 @@ describe("test Button component", () => {
 		const text = wrapper.getByText("hello");
 		expect(text).toHaveStyle("opacity: 0");
 		const wrapper2 = render(
-			<Button data-testid="button" isLoading loadingText="yehuozhili">
+			<Button data-testid="button" isLoading loadingText="careteen">
 				hello
 			</Button>
 		);
-		const text2 = wrapper2.getByText("yehuozhili");
+		const text2 = wrapper2.getByText("careteen");
 		expect(text2).toBeTruthy();
 	});
 	it("should isUnclickable ", () => {
