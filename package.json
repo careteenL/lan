@@ -25,7 +25,7 @@
     "sb": "start-storybook -p 6006 -s public",
     "build-sb": "build-storybook -s public",
     "build-sbs": "build-storybook --no-dll --quiet",
-    "coverage": "react-scripts test --coverage --watchAll=false",
+    "coverage": "react-scripts test --updateSnapshot --coverage --watchAll=false",
     "deploy": "yarn build && npm publish --access=public",
     "coverall": "npm run coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
