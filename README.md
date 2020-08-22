@@ -5,6 +5,7 @@
 [![npm](https://img.shields.io/badge/npm-0.1.0-orange.svg)](https://www.npmjs.com/package/@careteen/lan)
 [![NPM downloads](http://img.shields.io/npm/dm/@careteen/lan.svg?style=flat-square)](http://www.npmtrends.com/@careteen/lan)
 [![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
+[![Coverage Status](https://coveralls.io/repos/github/careteenL/lan/badge.svg)](https://coveralls.io/github/careteenL/lan)
 
 [English Document](./README.en_US.md)
 
