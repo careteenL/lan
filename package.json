@@ -1,6 +1,6 @@
 {
   "name": "@careteen/lan",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -32,9 +32,6 @@
     "coverage": "react-scripts test --updateSnapshot --coverage --watchAll=false",
     "deploy": "yarn build && npm publish --access=public",
     "coverall": "npm run coverage  && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@careteenl"
   },
   "files": [
     "dist"
