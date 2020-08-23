@@ -21,7 +21,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build-cjs": "microbundle build --tsconfig tsconfig.build.json --jsx React.createElement  --compress=false --format cjs",
+    "build-all": "microbundle build --tsconfig tsconfig.build.json --jsx React.createElement  --compress=false",
+    "build": "rimraf dist && yarn build-all & yarn build-cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 6006 -s public",
@@ -38,7 +40,8 @@
     "dist"
   ],
   "sideEffects": false,
-  "module": "dist/index.js",
+  "main": "dist/lan.js",
+  "module": "dist/lan.modern.js",
   "types": "dist/index.d.ts",
   "eslintConfig": {
     "extends": "react-app"
@@ -70,6 +73,7 @@
     "@storybook/react": "^6.0.10",
     "@types/styled-components": "^5.1.2",
     "babel-loader": "^8.1.0",
+    "microbundle": "^0.12.3",
     "react": ">16.8.0",
     "react-dom": ">16.8.0",
     "react-is": "^16.13.1",
