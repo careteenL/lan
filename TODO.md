@@ -5,6 +5,7 @@
 - [x] button
 - [x] icon
 - [x] highlight
+- [x] avatar
 - [x] badge
 - [x] radio
 - ...
