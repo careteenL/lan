@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import { Badge, badgeBackground, badgeColor, BadgeProps } from "./index";
 
 const testonClick = jest.fn();
@@ -28,8 +28,8 @@ describe("test Badge component", () => {
 		);
 		const text = wrapper.getByText("attr");
 		expect(text.className.includes("testclass")).toBeTruthy();
-		// fireEvent.click(text);
-		// expect(testonClick).toHaveBeenCalled();
+		fireEvent.click(text);
+		expect(testonClick).toHaveBeenCalled();
 	});
 	it("should rende correct theme", () => {
 		testThemeFunc("positive");

@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import { Radio } from "./index";
 import { color } from "../shared/styles";
 
@@ -11,8 +11,8 @@ describe("test Radio component", () => {
 		expect(wrapper).toMatchSnapshot();
 		const input = wrapper.container.querySelector("input")!;
 		expect(testfn).not.toHaveBeenCalled();
-		// fireEvent.click(input);
-		// expect(testfn).toHaveBeenCalled();
+		fireEvent.click(input);
+		expect(testfn).toHaveBeenCalled();
 	});
 	it("should render extra text", () => {
 		const wrapper = render(
@@ -41,7 +41,7 @@ describe("test Radio component", () => {
 		);
 		expect(wrapper).toMatchSnapshot();
 		const text = wrapper.getByText("test");
-		// fireEvent.click(text);
-		// expect(disablefn).not.toHaveBeenCalled();
+		fireEvent.click(text);
+		expect(disablefn).not.toHaveBeenCalled();
 	});
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import Button, { ButtonProps } from "./index";
 import { color, typography } from "../shared/styles";
 
@@ -37,8 +37,8 @@ describe("test Button component", () => {
 				.includes("testprops")
 		).toEqual(true);
 		//正常click
-		// fireEvent.click(ele);
-		// expect(defaultProps.onClick).toHaveBeenCalled();
+		fireEvent.click(ele);
+		expect(defaultProps.onClick).toHaveBeenCalled();
 		//span正常显示
 		expect(ele.getElementsByTagName("span")).toBeTruthy();
 		//正常默认属性
@@ -115,8 +115,8 @@ describe("test Button component", () => {
 		const ele = wrapper.getByTestId("button");
 		expect(ele).toBeInTheDocument();
 		expect(ele).toHaveStyle("cursor: not-allowed");
-		// fireEvent.click(ele);
-		// expect(disabledProps.onClick).not.toHaveBeenCalled();
+		fireEvent.click(ele);
+		expect(disabledProps.onClick).not.toHaveBeenCalled();
 	});
 	it("should render loading ", () => {
 		const wrapper = render(<Button data-testid="button" isLoading>hello</Button>);
@@ -138,7 +138,7 @@ describe("test Button component", () => {
 		const ele = wrapper.getByTestId("button");
 		expect(ele).toBeInTheDocument();
 		expect(ele).toHaveStyle("pointer-events: none");
-		// fireEvent.click(ele);
-		// expect(disabledProps.onClick).not.toHaveBeenCalled();
+		fireEvent.click(ele);
+		expect(disabledProps.onClick).not.toHaveBeenCalled();
 	});
 });
