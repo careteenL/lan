@@ -4,8 +4,11 @@ import React, {
   useState,
   useEffect,
   useMemo,
+  CSSProperties,
 } from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
+import { typography, color } from "../shared/styles";
+import { progressFlash } from "../shared/animation";
 export type ProgressProps = {
 	/** 传入数字 */
 	count: number;
@@ -14,24 +17,113 @@ export type ProgressProps = {
 	/** 环状不生效 进度条高度 */
 	height?: number;
 	/** 是否是环状 */
-	cicrle?: boolean;
+	circle?: boolean;
 	/** 环状才生效 环状大小 */
 	size?: number;
-	/** 自定义环状进度条文本内容 */
-	circleText?: ReactNode;
 	/** 自定义长条进度条文本内容 */
-	progressText?: ReactNode;
+  progressText?: ReactNode;
+  /** 长条闪烁动画颜色 */
+  flashColor?: string;
+  /** 主色 */
+  primary?: string;
+  /** 副色 */
+  secondary?: string;
+  /** 底座色 */
+  bottomColor?: string;
+  /** 外层容器style */
+  style?: CSSProperties;
+  /** 外层容器类名 */
+  classname?: string;
 };
+
+const BarWrapper = styled.div`
+	display: flex;
+	padding: 5px;
+	align-items: center;
+`;
+
+interface BarMainProps {
+	state: number;
+	height?: number;
+	flashColor: string;
+	primary: string;
+	secondary: string;
+}
+
+const BarMain = styled.div<BarMainProps>`
+	width: ${(props) => props.state}%;
+	height: ${(props) => (props.height ? props.height : 8)}px;
+	background-color: ${(props) => props.primary};
+	background-image: linear-gradient(
+		to right,
+		${(props) => props.primary},
+		${(props) => props.secondary}
+	);
+	transition: all 0.4s cubic-bezier(0.08, 0.82, 0.17, 1) 0s;
+	border-radius: 5px;
+	position: relative;
+	&::before {
+		animation: ${progressFlash} 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+		background: ${(props) => props.flashColor};
+		border-radius: 10px;
+		bottom: 0;
+		content: "";
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+`;
+const BarMainWrapper = styled.div<{ bottomColor: string; height?: number }>`
+	width: 100%;
+	border-radius: 5px;
+	position: relative;
+	background: ${(props) => props.bottomColor};
+	height: ${(props) => (props.height ? props.height : 8)}px;
+`;
+const BarText = styled.div<{ height?: number }>`
+	line-height: ${(props) => (props.height ? props.height : 8)}px;
+	font-weight: ${typography.weight.bold};
+	text-align: center;
+	display: inline-block;
+	margin-left: 10px;
+	min-width: 55px;
+`;
+const CircleWrapper = styled.div`
+	position: relative;
+	display: inline-block;
+	border-radius: 50%;
+`;
+
+const CircleText = styled.div<{ size: number }>`
+	line-height: ${(props) => props.size * 0.62}px;
+	width: ${(props) => props.size * 0.62}px;
+	height: ${(props) => props.size * 0.62}px;
+	border-radius: 50%;
+	display: inline-block;
+	font-weight: ${typography.weight.bold};
+	left: 50%;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+`;
 
 export function Progress(props: PropsWithChildren<ProgressProps>) {
 	const {
 		count,
 		countNumber,
 		height,
-		cicrle,
+		circle,
 		size,
-		circleText,
-		progressText,
+    progressText,
+    style,
+    classname,
+    bottomColor,
+    flashColor,
+    primary,
+    secondary,
 	} = props;
 	const [state, setState] = useState(0);
 	const [dasharray, setdashArray] = useState("");
@@ -45,18 +137,18 @@ export function Progress(props: PropsWithChildren<ProgressProps>) {
 		}
 	}, [count]);
 	useEffect(() => {
-		if (cicrle) {
+		if (circle) {
 			let percent = state / 100;
 			let perimeter = Math.PI * 2 * 170; //周长
 			let dasharray =
 				perimeter * percent + " " + perimeter * (1 - percent);
 			setdashArray(dasharray);
 		}
-	}, [cicrle, state]);
+	}, [circle, state]);
 	const render = useMemo(() => {
-		if (cicrle) {
+		if (circle) {
 			return (
-				<div>
+				<CircleWrapper style={style} className={classname}>
 					<svg
 						width={size}
 						height={size}
@@ -71,8 +163,8 @@ export function Progress(props: PropsWithChildren<ProgressProps>) {
 								cy="100%"
 								spreadMethod="pad"
 							>
-								<stop offset="0%" stopColor="#40a9ff" />
-								<stop offset="100%" stopColor="#36cfc9" />
+								<stop offset="0%" stopColor={primary} />
+								<stop offset="100%" stopColor={secondary} />
 							</radialGradient>
 						</defs>
 						<circle
@@ -80,7 +172,7 @@ export function Progress(props: PropsWithChildren<ProgressProps>) {
 							cy="210"
 							r="170"
 							strokeWidth="40"
-							stroke="#f5f5f5"
+							stroke={bottomColor}
 							fill="none"
 						></circle>
 						<circle
@@ -100,46 +192,45 @@ export function Progress(props: PropsWithChildren<ProgressProps>) {
 							}}
 						></circle>
 					</svg>
-					<div
-						style={{
-							lineHeight: `${size! * 0.62}px`,
-							width: `${size! * 0.62}px`,
-							height: `${size! * 0.62}px`,
-						}}
-					>
-						{circleText ? circleText : `${state}%`}
-					</div>
-				</div>
+					<CircleText size={size!}>
+						{progressText ? progressText : `${state}%`}
+					</CircleText>
+				</CircleWrapper>
 			);
 		} else {
 			return (
-				<div style={{ display: "flex" }}>
-					<div style={{ width: "100%" }}>
-						<div
-							style={{
-								width: `${state}%`,
-								height: `${height ? height : 8}px`,
-								background: "red",
-							}}
-						></div>
-					</div>
+				<BarWrapper style={style} className={classname}>
+					<BarMainWrapper bottomColor={bottomColor!} height={height}>
+						<BarMain
+							flashColor={flashColor!}
+							primary={primary!}
+							secondary={secondary!}
+							state={state}
+							height={height}
+						></BarMain>
+					</BarMainWrapper>
 					{countNumber && (
-						<div style={{ lineHeight: `${height ? height : 8}px` }}>
+						<BarText height={height}>
 							{progressText ? progressText : `${state}%`}
-						</div>
+						</BarText>
 					)}
-				</div>
+				</BarWrapper>
 			);
 		}
 	}, [
-		cicrle,
-		circleText,
+		circle,
 		countNumber,
-		dasharray,
-		height,
+    dasharray,
+    primary,
+    secondary,
+    height,
+    flashColor,
 		progressText,
 		size,
-		state,
+    state,
+		bottomColor,
+		style,
+		classname,
 	]);
 
 	return <>{render}</>;
@@ -147,6 +238,10 @@ export function Progress(props: PropsWithChildren<ProgressProps>) {
 
 Progress.defaultProps = {
 	countNumber: true,
-	cicrle: false,
-	size: 100,
+	circle: false,
+  size: 100,
+	primary: color.primary,
+	secondary: color.gold,
+	flashColor: color.lightest,
+	bottomColor: color.medium,
 };
