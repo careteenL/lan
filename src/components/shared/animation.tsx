@@ -23,3 +23,27 @@ export const progressFlash = keyframes`
     width: 100%; 
   }
 `;
+
+export const modalOpenAnimate = keyframes`
+  0% {
+    opacity: 0;
+    transform: scaleY(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: center;
+  }
+`;
+
+export const modalCloseAnimate = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1, 1);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0, 0);
+  }
+`;
