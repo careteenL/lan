@@ -1,5 +1,5 @@
 import React, { useMemo, ReactNode, useEffect, useState } from "react";
-import ReactDom, { unmountComponentAtNode } from "react-dom";
+import { render, unmountComponentAtNode } from "react-dom";
 import styled, { css } from "styled-components";
 import { color, typography, messageBoxShadow } from "../shared/styles";
 import { iconSpin, messageOpenAnimate, messageCloseAnimate } from "../shared/animation";
@@ -63,7 +63,7 @@ export const createMessage = (type: MessageType) => {
 
 		const divs = document.createElement("div");
 		wrap.appendChild(divs);
-		ReactDom.render(
+		render(
 			<Message
 				rootDom={wrap}
 				parentDom={divs}
