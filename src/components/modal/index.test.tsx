@@ -4,13 +4,13 @@ import { Modal } from "./index";
 
 describe("test Modal component", () => {
 
-	it("should render text", () => {
-		const wrapper = render(
-			<Modal
+  it("should render text", () => {
+    const wrapper = render(
+      <Modal
         visible={true}
         parentSetState={() => {}}
-			></Modal>
-		);
-		expect(wrapper).toMatchSnapshot();
-	});
+      ></Modal>
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
 });

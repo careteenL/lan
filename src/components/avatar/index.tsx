@@ -5,10 +5,10 @@ import { glow } from "../shared/animation";
 import { Icon } from "../icon";
 
 export const AvatarSize = {
-	large: 40,
-	medium: 28,
-	small: 20,
-	tiny: 16,
+  large: 40,
+  medium: 28,
+  small: 20,
+  tiny: 16,
 };
 
 const Image = styled.div<AvatarProps>`
@@ -24,34 +24,34 @@ const Image = styled.div<AvatarProps>`
   line-height: ${AvatarSize.medium}px;
 
   ${(props) =>
-		props.size === "tiny" &&
-		css`
-			height: ${AvatarSize.tiny}px;
-			width: ${AvatarSize.tiny}px;
-			line-height: ${AvatarSize.tiny}px;
-		`}
+    props.size === "tiny" &&
+    css`
+      height: ${AvatarSize.tiny}px;
+      width: ${AvatarSize.tiny}px;
+      line-height: ${AvatarSize.tiny}px;
+    `}
 
   ${(props) =>
-		props.size === "small" &&
-		css`
-			height: ${AvatarSize.small}px;
-			width: ${AvatarSize.small}px;
-			line-height: ${AvatarSize.small}px;
-		`}
+    props.size === "small" &&
+    css`
+      height: ${AvatarSize.small}px;
+      width: ${AvatarSize.small}px;
+      line-height: ${AvatarSize.small}px;
+    `}
 
   ${(props) =>
-		props.size === "large" &&
-		css`
-			height: ${AvatarSize.large}px;
-			width: ${AvatarSize.large}px;
-			line-height: ${AvatarSize.large}px;
-		`}
+    props.size === "large" &&
+    css`
+      height: ${AvatarSize.large}px;
+      width: ${AvatarSize.large}px;
+      line-height: ${AvatarSize.large}px;
+    `}
 
   ${(props) =>
-		!props.src &&
-		css`
-			background: ${!props.isLoading && "#37D5D3"};
-		`}
+    !props.src &&
+    css`
+      background: ${!props.isLoading && "#37D5D3"};
+    `}
 
   img {
     width: 100%;
@@ -98,58 +98,58 @@ const Initial = styled.div<AvatarProps>`
 `;
 
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
-	/** 是否加载中*/
-	isLoading?: boolean;
-	/** 用户名*/
-	username?: string;
-	/** 图片地址 */
-	src?: null | string;
-	/** 头像大小 */
-	size?: keyof typeof AvatarSize;
+  /** 是否加载中*/
+  isLoading?: boolean;
+  /** 用户名*/
+  username?: string;
+  /** 图片地址 */
+  src?: null | string;
+  /** 头像大小 */
+  size?: keyof typeof AvatarSize;
 };
 interface a11yProps {
-	[key: string]: boolean | string;
+  [key: string]: boolean | string;
 }
 
 export function Avatar(props: AvatarProps) {
-	const { isLoading, src, username, size } = props;
-	const avatarFigureFn = useMemo(() => {
-		let avatarFigure = <Icon icon="useralt" />;
-		const a11yProps: a11yProps = {};
-		if (isLoading) {
-			a11yProps["aria-busy"] = true;
-			a11yProps["aria-label"] = "Loading avatar ...";
-		} else if (src) {
-			avatarFigure = (
-				<img src={src} alt={username} data-testid="avatar-img" />
-			);
-		} else {
-			a11yProps["aria-label"] = username!;
-			avatarFigure = (
-				<Initial size={size} aria-hidden="true">
-					{username!.substring(0, 1)}
-				</Initial>
-			);
-		}
-		return avatarFigure;
-	}, [isLoading, src, username, size]);
+  const { isLoading, src, username, size } = props;
+  const avatarFigureFn = useMemo(() => {
+    let avatarFigure = <Icon icon="useralt" />;
+    const a11yProps: a11yProps = {};
+    if (isLoading) {
+      a11yProps["aria-busy"] = true;
+      a11yProps["aria-label"] = "Loading avatar ...";
+    } else if (src) {
+      avatarFigure = (
+        <img src={src} alt={username} data-testid="avatar-img" />
+      );
+    } else {
+      a11yProps["aria-label"] = username!;
+      avatarFigure = (
+        <Initial size={size} aria-hidden="true">
+          {username!.substring(0, 1)}
+        </Initial>
+      );
+    }
+    return avatarFigure;
+  }, [isLoading, src, username, size]);
 
-	return (
-		<Image
-			size={size}
-			isLoading={isLoading}
-			src={src}
-			{...props}
-			data-testid="avatar-div"
-		>
-			{avatarFigureFn}
-		</Image>
-	);
+  return (
+    <Image
+      size={size}
+      isLoading={isLoading}
+      src={src}
+      {...props}
+      data-testid="avatar-div"
+    >
+      {avatarFigureFn}
+    </Image>
+  );
 }
 
 Avatar.defaultProps = {
-	isLoading: false,
-	username: "loading",
-	src: null,
-	size: "medium",
+  isLoading: false,
+  username: "loading",
+  src: null,
+  size: "medium",
 };

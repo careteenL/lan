@@ -12,18 +12,18 @@ export default {
 };
 
 export const knobsProgress = () => (
-	<Progress
-		count={number("count", 50, { range: true, min: 0, max: 100, step: 1 })}
-		countNumber={boolean("countNumber", true)}
-		height={number("height", 8)}
-		circle={boolean("circle", false)}
-		size={number("size", 100)}
-		primary={color("primary", "#E43")}
-		secondary={color("secondary", "#E44")}
-		bottomColor={color("bottomColor", "#f5f5f5")}
-		flashColor={color("flashColor", "#FFFFFF")}
-		progressText={text("progressText", "")}
-	></Progress>
+  <Progress
+    count={number("count", 50, { range: true, min: 0, max: 100, step: 1 })}
+    countNumber={boolean("countNumber", true)}
+    height={number("height", 8)}
+    circle={boolean("circle", false)}
+    size={number("size", 100)}
+    primary={color("primary", "#E43")}
+    secondary={color("secondary", "#E44")}
+    bottomColor={color("bottomColor", "#f5f5f5")}
+    flashColor={color("flashColor", "#FFFFFF")}
+    progressText={text("progressText", "")}
+  ></Progress>
 );
 
 export const circle = () => <Progress count={20} circle={true}></Progress>;
