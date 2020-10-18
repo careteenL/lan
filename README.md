@@ -17,10 +17,15 @@ npm i -S @careteen/lan
 ```
 
 ```tsx
+// ...
 import { Button } from '@careteen/lan'
+// ...
+return (
+  <Button appearance="primary">Primary</Button>
+)
 ```
 
-TODO
+[使用文档](http://careteenl.github.io/lan/)
 
 ## Run
 
