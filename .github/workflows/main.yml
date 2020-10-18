@@ -21,10 +21,10 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: storybook-static # The folder the action should deploy.
 
-      - name: Coveralls
-        env:
-          COVERALLS_SERVICE_NAME: 'GitHub CI'
-          COVERALLS_GIT_BRANCH: master
-          COVERALLS_REPO_TOKEN : ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: |
-          npm run coverall
+      # - name: Coveralls
+      #   env:
+      #     COVERALLS_SERVICE_NAME: 'GitHub CI'
+      #     COVERALLS_GIT_BRANCH: master
+      #     COVERALLS_REPO_TOKEN : ${{ secrets.COVERALLS_REPO_TOKEN }}
+      #   run: |
+      #     npm run coverall
